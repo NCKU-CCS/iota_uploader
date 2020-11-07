@@ -44,6 +44,16 @@ class Iota:
 
     @staticmethod
     def send_to_iota(node: str, transactions: List[Transaction], local_pow: bool = False) -> str:
+        """send json type data to IOTA
+
+        Args:
+            node (str): IOTA node
+            transactions (List[Transaction]): transactions
+            local_pow (bool, optional): local pow, might failed. Defaults to False.
+
+        Returns:
+            str: transaction hash
+        """
         logger.info(f"[SEND TO IOTA] Data: {transactions}")
         # Prepare transactions
         transfers = [

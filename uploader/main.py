@@ -42,7 +42,7 @@ def upload_dr(node: str):
             # Upload to IOTA
             transaction = Transaction(address=RECEIVER, message=result, tag=f"SHALUN_{department.name}")
             transaction_hash = send_message(node, [transaction])
-            # Update bundle_hash in db
+            # Update transaction_hash in db
             try:
                 if transaction_hash:
                     logger.debug(f"[Upload DR] Transaction hash: {transaction_hash}")
