@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 import requests
@@ -15,7 +16,7 @@ class Iota:
 
         Args:
             nodes (List[str]): nodes for testing
-            nodes (int): timeout for testing
+            timeout (int): timeout for testing
 
         Returns:
             List[str]: available nodes
@@ -48,20 +49,23 @@ class Iota:
         transfers = [
             ProposedTransaction(
                 address=Address(transaction.address),
-                message=TryteString.from_string(transaction.message),
-                tag=Tag(transaction.tag),
+                message=TryteString.from_bytes(json.dumps(transaction.message).encode()),
+                tag=Tag(transaction.tag.replace("_", "9")),
                 value=0,
             )
             for transaction in transactions
         ]
         # Create adapter
+        logger.info(f"[SEND TO IOTA] IOTA node: {node}")
         api = iota(adapter=node, local_pow=local_pow)
         # Send transactions to IOTA
         logger.info("[SEND TO IOTA] Sending...")
         bundle_result = api.send_transfer(transfers=transfers)["bundle"]
         logger.info("[SEND TO IOTA]            Done")
-        # Bundle hash
-        logger.info(f"[SEND TO IOTA] Bundle hash: {bundle_result.hash}")
+        # Transaction hash
+        logger.info(
+            f"[SEND TO IOTA] Transaction hash: {bundle_result.transactions[0].hash}, Bundle hash: {bundle_result.hash}"
+        )
         # Show bundle result
         logger.debug(bundle_result.as_json_compatible())
-        return str(bundle_result.hash)
+        return str(bundle_result.transactions[0].hash)

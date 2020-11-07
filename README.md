@@ -1,11 +1,18 @@
-# IOTA Message Uploader
+# IOTA DR Uploader
 
-a simple IOTA message uploader in Python3.7
+an IOTA message uploader in Python3.7 for DR result
 
 ## Introduce
 
+1. Check available nodes
+2. Get DR data from database
+3. Upload DR data to IOTA
+4. Update database
+
+### Files
+
 + [main.py](./main.py)
-    example for using uploader
+    main function for uploading DR data
 
 + [tangle.py](./uploader/tangle.py)
     implement IOTA node availability checker and message uploader
