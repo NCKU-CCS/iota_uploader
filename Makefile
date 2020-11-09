@@ -10,7 +10,7 @@ dev: init
 	pipenv install --dev
 
 run:
-	pipenv run python main.py
+	pipenv run python $(PKG)/main.py
 
 commit:
 	pipenv run cz commit
