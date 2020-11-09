@@ -37,5 +37,16 @@ make init
 make run
 ```
 
+## Solved Problems
+
+### package install error
+
++ pysha3
+    package: `pysha3` (dependency of pyota)
+    OS: Ubuntu 18.04
+    Error Message: `src/ccurlmodule.c:1:10: fatal error: Python.h: No such file or directory`
+    Reason: No `Python.h` file
+    Solution: Install python3.7-dev `$ apt-get install python3.7-dev`
+
 # Contributer
 Chi-Sung, Wang
